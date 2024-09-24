@@ -1,0 +1,26 @@
+nav {
+    align-items: center;
+    background-color: #444444;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+nav h2 {
+    margin: 0;
+    padding: .8rem;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+  
+li {
+    margin: 8px;
+}
+
+.login {
+    margin-left: auto; /* Push the login item to the far right */
+    margin-right: 25px;
+}
