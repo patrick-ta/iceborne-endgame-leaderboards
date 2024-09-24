@@ -5,6 +5,7 @@ const userModel = require('../models/user.model');
 
 const router = express.Router();
 
+//Signup route
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -16,6 +17,7 @@ router.post('/signup', async (req, res) => {
     }
 });
 
+//Login route
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -41,6 +43,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
+//Logout route
 router.post('/logout', (req, res) => {
     res.cookie('token', '', { httpOnly: true, expires: new Date(0) });
     res.send('Logged out');
