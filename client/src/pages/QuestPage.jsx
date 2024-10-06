@@ -1,9 +1,15 @@
 import { useEffect, useState } from "react"
 import QuestButton from "../components/QuestButton/QuestButton"
+import { useNavigate } from "react-router-dom";
 
 const QuestPage = () => {
     const [quests, setQuests] = useState([]);
     const [loading, setLoading] = useState(true);
+    const navigate = useNavigate();
+
+    const navigateToLeaderboard = (questNameParam) => {
+        navigate(`/quests/${questNameParam}`);
+    }
 
     useEffect(() => {
         const fetchQuests = async () => {
@@ -35,7 +41,7 @@ const QuestPage = () => {
 
         <ul>
             {quests.map((quest) => (
-                <li key={quest.id}>
+                <li key={quest.id} onClick={() => navigateToLeaderboard(quest.quest_name_param)}>
                     <QuestButton monster={quest.monster} questName={quest.quest_name} imageUrl={quest.image_url}/>
                 </li>
             ))}
