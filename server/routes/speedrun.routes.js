@@ -1,10 +1,13 @@
 const express = require('express');
 const speedrunModel = require('../models/speedrun.model');
+const questModel = require('../models/quest.model');
 
 const router = express.Router();
 
-router.get('/get-speedruns', async (req, res) => {
-    const speedruns = await speedrunModel.getSpeedruns();
+router.post('/get-speedruns', async (req, res) => {
+    const { questNameParam } = req.body;
+    const questName = await questModel.getQuestFromParam(questNameParam);
+    const speedruns = await speedrunModel.getSpeedruns(questName);
     res.send(speedruns);
 });
 

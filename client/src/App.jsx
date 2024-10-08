@@ -7,7 +7,7 @@ import SubmitPage from './pages/SubmitPage'
 import SubmissionPage from './pages/SubmissionPage'
 import UserRoute from './routes/UserRoute'
 import ModeratorRoute from './routes/ModeratorRoute'
-import LeaderboardPage from './pages/LeaderboardPage'
+import LeaderboardPage from './pages/LeaderboardPage/LeaderboardPage.jsx'
 
 function App() {
 

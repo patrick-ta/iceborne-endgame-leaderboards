@@ -1,7 +1,9 @@
 const pool = require('../config/db.config');
 
-const getSpeedruns = async () => {
-    const result = await pool.query('SELECT * FROM speedruns');
+const getSpeedruns = async (questName) => {
+    const result = await pool.query('SELECT * FROM speedruns WHERE quest_name = $1',
+        [questName]
+    );
     return result.rows;
 }
 
