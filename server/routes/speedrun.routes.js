@@ -3,6 +3,11 @@ const speedrunModel = require('../models/speedrun.model');
 
 const router = express.Router();
 
+router.get('/get-speedruns', async (req, res) => {
+    const speedruns = await speedrunModel.getSpeedruns();
+    res.send(speedruns);
+});
+
 router.post('/submit', async (req, res) => {
     try {
         const { runner, time, link, weapon, quest, ruleset } = req.body;
