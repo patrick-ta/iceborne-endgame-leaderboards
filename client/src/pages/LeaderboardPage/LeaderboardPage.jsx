@@ -7,6 +7,16 @@ const LeaderboardPage = () => {
     const [loading, setLoading] = useState(true);
     const [speedruns, setSpeedruns] = useState([]);
 
+    function convertToTitleCase(questNameParam) {
+        const str = questNameParam.replace(/-/g, ' ');
+
+        const exceptions = ['of', 'the', 'are'];
+
+        return str.toLowerCase().split(' ').map((word, i) => {
+            return exceptions.includes(word) && i != 0 ? word : word.charAt(0).toUpperCase().concat(word.substr(1));
+        }).join(' ');
+    }
+
     useEffect(() => {
         const fetchSpeedruns = async () => {
             try {
@@ -38,7 +48,7 @@ const LeaderboardPage = () => {
     return (
         <>
         <main className='left-margin'>
-        <h1>asd</h1>
+        <h1>{convertToTitleCase(questNameParam)}</h1>
         
         <table>
             <thead>
