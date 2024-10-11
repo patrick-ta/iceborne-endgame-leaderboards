@@ -3,4 +3,14 @@ table {
     max-width: 80%;
     margin-bottom: 1rem;
     background-color: transparent;
+    border-collapse: collapse;
+}
+
+thead {
+    text-align: left;
+}
+
+td, th {
+    border: 1px solid #dee2e6;
+    padding: 10px;
 }

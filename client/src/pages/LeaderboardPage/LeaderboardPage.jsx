@@ -32,22 +32,22 @@ const LeaderboardPage = () => {
     }, []);
 
     if (loading) {
-        return <div>Loading...</div>;
+        return <div>{questNameParam}</div>;
     }
 
     return (
         <>
         <main className='left-margin'>
-        <div>{questNameParam}</div>
+        <h1>asd</h1>
         
         <table>
             <thead>
                 <tr>
-                    <th className="medium-width">Runner</th>
-                    <th className="small-width">Time</th>
-                    <th className="medium-width">Weapon</th>
-                    <th className="large-width">Quest</th>
-                    <th className="small-width">Ruleset</th>
+                    <th>Runner</th>
+                    <th>Time</th>
+                    <th>Weapon</th>
+                    <th>Quest</th>
+                    <th>Ruleset</th>
                 </tr>
             </thead>
 
