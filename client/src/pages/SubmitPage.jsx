@@ -1,87 +1,214 @@
 import { useState } from "react"
 
 const SubmitPage = () => {
-    const [runner, setRunner] = useState('');
-    const [time, setTime] = useState('');
-    const [link, setLink] = useState('');
-    const [weapon, setWeapon] = useState('');
-    const [quest, setQuest] = useState('');
-    const [ruleset, setRuleset] = useState('');
+    // Initialize state variables for speedrun submission data
+    const [submissionData, setSubmissionData] = useState({
+        runner: '', // Speedrunner name
+        time: '', // Speedrun time
+        link: '', // Link to video
+        weapon: '', // Weapon used
+        quest: '', // Quest name
+        ruleset: '', // Ruleset/category (freestyle or ta wiki)
+    })
 
-    const handleRunnerChange = (event) => setRunner(event.target.value);
-    const handleTimeChange = (event) => setTime(event.target.value);
-    const handleLinkChange = (event) => setLink(event.target.value);
-    const handleWeaponChange = (event) => setWeapon(event.target.value);
-    const handleQuestChange = (event) => setQuest(event.target.value);
-    const handleRulesetChange = (event) => setRuleset(event.target.value);
+    // State variable for validation
+    const [errors, setErrors] = useState({});
 
+    console.log(errors)
+
+    // Update submissionData when user inputs data
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setSubmissionData({
+            ...submissionData,
+            [name]: value,
+        })
+    }
+
+    // Form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            console.log("test")
-            const response = await fetch('http://localhost:5000/api/speedruns/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify({runner, time, link, weapon, quest, ruleset}),
-            });
-        } catch (error) {
-            console.log(error);
+        // Get incorrect and missing input fields
+        const newErrors = validateForm(submissionData);
+        setErrors(newErrors);
+
+        // If there are no errors, submit speedrun
+        if (Object.keys(newErrors).length === 0) {
+            try {
+                console.log('Form submitted successfully!');
+                const response = await fetch('http://localhost:5000/api/speedruns/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(submissionData),
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        } else {
+            console.log('Form submission failed due to validation errors.');
         }
+
+        
+    }
+
+    // Form validation logic
+    const validateForm = (data) => {
+        const errors = {};
+
+        //If fields are empty, add error message to errors object
+        if (!data.runner.trim()) {
+            errors.runner = 'Runner name is required';
+        }
+
+        if (!data.time.trim()) {
+            errors.time = 'Time is required';
+        }
+
+        if (!data.link.trim()) {
+            errors.link = 'Run link is required';
+        }
+
+        if (!data.weapon.trim()) {
+            errors.weapon = 'Weapon is required';
+        }
+
+        if (!data.quest.trim()) {
+            errors.quest = 'Quest name is required';
+        }
+
+        if (!data.ruleset.trim()) {
+            errors.ruleset = 'Ruleset is required';
+        }
+
+        return errors;
     }
 
     return (
         <main className="left-margin">
             <h1>Submit a Run</h1>
             <form onSubmit={handleSubmit}>
-                <input className="input-field" type="text" placeholder="Runner"
-                onChange={handleRunnerChange} value={runner}/>
+                <div>
+                    <input 
+                        className="input-field" 
+                        type="text" 
+                        placeholder="Runner"
+                        name="runner" 
+                        onChange={handleChange} 
+                        value={submissionData.runner}
+                    />
+                    {errors.runner && (
+                        <span>
+                            {errors.runner}
+                        </span>
+                    )}
+                </div>
 
-                <input className="input-field" type="text" placeholder="Time"
-                onChange={handleTimeChange} value={time}/>
+                <div>
+                    <input 
+                        className="input-field" 
+                        type="text" 
+                        placeholder="Time"
+                        name="time" 
+                        onChange={handleChange} 
+                        value={submissionData.time}
+                    />
+                    {errors.time && (
+                        <span>
+                            {errors.time}
+                        </span>
+                    )}
+                </div>
 
-                <input className="input-field" type="text" placeholder="Link"
-                onChange={handleLinkChange} value={link}/>
+                <div>
+                    <input 
+                        className="input-field" 
+                        type="text" 
+                        placeholder="Link"
+                        name="link" 
+                        onChange={handleChange} 
+                        value={submissionData.link}
+                    />
+                    {errors.link && (
+                        <span>
+                            {errors.link}
+                        </span>
+                    )}
+                </div>
 
-                <select className="input-field"
-                onChange={handleWeaponChange} value={weapon}>
-                    <option value="default" hidden>Weapon</option>
-                    <option value="Greatsword">Greatsword</option>
-                    <option value="Longsword">Longsword</option>
-                    <option value="Sword and Shield">Sword and Shield</option>
-                    <option value="Dual Blades">Dual Blades</option>
-                    <option value="Hammer">Hammer</option>
-                    <option value="Hunting Horn">Hunting Horn</option>
-                    <option value="Lance">Lance</option>
-                    <option value="Gunlance">Gunlance</option>
-                    <option value="Switch Axe">Switch Axe</option>
-                    <option value="Charge Blade">Charge Blade</option>
-                    <option value="Insect Glaive">Insect Glaive</option>
-                    <option value="Light Bowgun">Light Bowgun</option>
-                    <option value="Heavy Bowgun">Heavy Bowgun</option>
-                    <option value="Bow">Bow</option>
-                </select>
+                <div>
+                    <select 
+                        className="input-field"
+                        name="weapon" 
+                        onChange={handleChange} 
+                        value={submissionData.weapon}
+                    >
+                        <option value="default" hidden>Weapon</option>
+                        <option value="Greatsword">Greatsword</option>
+                        <option value="Longsword">Longsword</option>
+                        <option value="Sword and Shield">Sword and Shield</option>
+                        <option value="Dual Blades">Dual Blades</option>
+                        <option value="Hammer">Hammer</option>
+                        <option value="Hunting Horn">Hunting Horn</option>
+                        <option value="Lance">Lance</option>
+                        <option value="Gunlance">Gunlance</option>
+                        <option value="Switch Axe">Switch Axe</option>
+                        <option value="Charge Blade">Charge Blade</option>
+                        <option value="Insect Glaive">Insect Glaive</option>
+                        <option value="Light Bowgun">Light Bowgun</option>
+                        <option value="Heavy Bowgun">Heavy Bowgun</option>
+                        <option value="Bow">Bow</option>
+                    </select>
+                    {errors.weapon && (
+                        <span>
+                            {errors.weapon}
+                        </span>
+                    )}
+                </div>
 
-                <select className="input-field"
-                onChange={handleQuestChange} value={quest}>
-                    <option value="default" hidden>Quest</option>
-                    <option value="Fade to Black">Fade to Black</option>
-                    <option value="The Evening Star">The Evening Star</option>
-                    <option value="Dawn of the Death Star">Dawn of the Death Star</option>
-                    <option value="The Place Where Winter Sleeps">The Place Where Winter Sleeps</option>
-                    <option value="Mew are Number One!">Mew are Number One!</option>
-                </select>
+                <div>
+                    <select 
+                        className="input-field"
+                        name="quest" 
+                        onChange={handleChange} 
+                        value={submissionData.quest}
+                    >
+                        <option value="default" hidden>Quest</option>
+                        <option value="Fade to Black">Fade to Black</option>
+                        <option value="The Evening Star">The Evening Star</option>
+                        <option value="Dawn of the Death Star">Dawn of the Death Star</option>
+                        <option value="The Place Where Winter Sleeps">The Place Where Winter Sleeps</option>
+                        <option value="Mew are Number One!">Mew are Number One!</option>
+                    </select>
+                    {errors.quest && (
+                        <span>
+                            {errors.quest}
+                        </span>
+                    )}
+                </div>
 
-                <select className="input-field"
-                onChange={handleRulesetChange} value={ruleset}>
-                    <option value="default" hidden>Ruleset</option>
-                    <option value="Freestyle">Freestyle</option>
-                    <option value="TA Wiki">TA Wiki</option>
-                </select>
+                <div>
+                    <select 
+                        className="input-field"
+                        name="ruleset" 
+                        onChange={handleChange} 
+                        value={submissionData.ruleset}
+                    >
+                        <option value="default" hidden>Ruleset</option>
+                        <option value="Freestyle">Freestyle</option>
+                        <option value="TA Wiki">TA Wiki</option>
+                    </select>
+                    {errors.ruleset && (
+                        <span>
+                            {errors.ruleset}
+                        </span>
+                    )}
+                </div>
 
                 <button type="submit">Submit</button>
+
             </form>
         </main>
     )

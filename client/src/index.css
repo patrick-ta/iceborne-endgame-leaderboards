@@ -63,9 +63,14 @@ button:focus-visible {
 }
 
 .input-field {
-  display: block;
   margin-bottom: 10px;
-  width: 300px;
+  box-sizing: border-box;
+  width: 20%;
+}
+
+span {
+  margin-left: 1%;
+  color: rgb(253, 144, 144);
 }
 
 .flex {
