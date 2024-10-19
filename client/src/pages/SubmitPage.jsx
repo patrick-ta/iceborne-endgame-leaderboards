@@ -14,6 +14,8 @@ const SubmitPage = () => {
     // State variable for validation
     const [errors, setErrors] = useState({});
 
+    const [submitted, setSubmitted] = useState(false);
+
     console.log(errors)
 
     // Update submissionData when user inputs data
@@ -46,6 +48,8 @@ const SubmitPage = () => {
                 });
             } catch (error) {
                 console.log(error);
+            } finally {
+                setSubmitted(true);
             }
         } else {
             console.log('Form submission failed due to validation errors.');
@@ -86,6 +90,15 @@ const SubmitPage = () => {
         return errors;
     }
 
+    // If speedrun is submitted successfully, return confirmation
+    if (submitted) {
+        return (
+            <main className="left-margin">
+                <h1>Speedrun submitted!</h1>
+            </main>
+        )
+    }
+    // Otherwise return speedrun form
     return (
         <main className="left-margin">
             <h1>Submit a Run</h1>
