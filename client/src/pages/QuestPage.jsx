@@ -1,52 +1,39 @@
-import { useEffect, useState } from "react"
-import QuestButton from "../components/QuestButton/QuestButton"
 import { useNavigate } from "react-router-dom";
 
-const QuestPage = () => {
-    const [quests, setQuests] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
+import QuestButton from "../components/QuestButton/QuestButton"
 
+import useFetchQuests from "../hooks/useFetchQuests";
+
+const QuestPage = () => {
+    // Invoke useFetchQuests to get loading state and quest list
+    const { isLoadingQuests, quests } = useFetchQuests();
+
+    // Navigation to quest leaderboard pages
+    const navigate = useNavigate();
     const navigateToLeaderboard = (questNameParam) => {
         navigate(`/quests/${questNameParam}`);
     }
 
-    useEffect(() => {
-        const fetchQuests = async () => {
-            try {
-                const response = await fetch('http://localhost:5000/api/quests/get-quests', {
-                    method: 'GET',
-                    credentials: 'include',
-                });
-                const data = await response.json();
-                setQuests(data); 
-            } catch (error) {
-                console.log(error);
-            } finally {
-                setLoading(false); 
-            }
-        }
-
-        fetchQuests();
-    }, []);
-
-    if (loading) {
+    // If the quests are still loading, return loading text
+    if (isLoadingQuests) {
         return <div>Loading...</div>;
     }
-
+    // Otherwise display quest buttons
     return (
         <>
         <main className="left-margin">
-        <h1>Quests</h1>
+            <h1>Quests</h1>
 
-        <ul>
-            {quests.map((quest) => (
-                <li key={quest.id} onClick={() => navigateToLeaderboard(quest.quest_name_param)}>
-                    <QuestButton monster={quest.monster} questName={quest.quest_name} imageUrl={quest.image_url}/>
-                </li>
-            ))}
-        </ul>
-
+            <ul>
+                {quests.map((quest) => (
+                    <li 
+                        key={quest.id} 
+                        onClick={() => navigateToLeaderboard(quest.quest_name_param)}
+                    >
+                        <QuestButton monster={quest.monster} questName={quest.quest_name} imageUrl={quest.image_url}/>
+                    </li>
+                ))}
+            </ul>
         </main>
         </>
     )
