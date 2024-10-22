@@ -10,6 +10,14 @@ nav h2 {
     padding: .8rem;
 }
 
+nav li {
+    cursor: pointer;
+    color: rgb(156, 156, 156);
+}
+nav li:hover {
+    color: white;
+}
+
 ul {
     list-style-type: none;
     margin: 0;

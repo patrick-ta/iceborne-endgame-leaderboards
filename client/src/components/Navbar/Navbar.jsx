@@ -17,6 +17,14 @@ const Navbar = () => {
     verifyRole();
     }, []);
 
+    const navigateToQuestPage = () => {
+        navigate(`/`);
+    }
+
+    const navigateToSubmitPage = () => {
+        navigate(`/submit`);
+    }
+
     const handleLogout = async () => {
         try {
             const response = await fetch('http://localhost:5000/api/auth/logout', {
@@ -37,10 +45,10 @@ const Navbar = () => {
     return (
         <>
         <nav className='flex'>
-            <h2>Iceborne Endgame Leaderboards</h2>
+            <h2 onClick={() => navigateToQuestPage()}>Iceborne Endgame Leaderboards</h2>
             <ul className='flex'>
-                <li>Quests</li>
-                <li>Submit</li>
+                <li onClick={() => navigateToQuestPage()}>Quests</li>
+                <li onClick={() => navigateToSubmitPage()}>Submit</li>
             </ul>
             
             {isAuthenticated ? <button onClick={handleLogout} className='login'>Logout</button> : <button onClick={() => navigate('/login')} className='login'>Login</button>}
