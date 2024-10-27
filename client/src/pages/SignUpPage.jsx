@@ -27,16 +27,29 @@ const SignUpPage = () => {
     return (
         <main className="left-margin">
 
-        <h1>Sign Up</h1>
+            <h1>Sign Up</h1>
 
-        <input className="input-field" type="text" placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}/>
-        <input className="input-field" type="password" placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}/>
-        <p>Already have an account? Sign in!</p>
-        <button onClick={handleSignUp}>Sign Up</button>
+            <div>
+                <input 
+                    className="input-field" 
+                    type="text" 
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+            </div>
+            <div>
+                <input 
+                    className="input-field" 
+                    type="password" 
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </div>
+            
+            <p>Already have an account? Sign in!</p>
+            <button onClick={handleSignUp}>Sign Up</button>
         
         </main>
     )

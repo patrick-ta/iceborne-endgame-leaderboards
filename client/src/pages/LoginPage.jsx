@@ -30,21 +30,33 @@ const LoginPage = () => {
     }
 
     return (
-        <>
         <main className="left-margin">
+            <h1>Login</h1>
 
-        <h1>Login</h1>
-        <input className="input-field" type="text" placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}/>
-        <input className="input-field" type="password" placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}/>
-        <p>Don't have an account? Sign up!</p>
-        <button onClick={handleLogin}>Login</button>
-        
+            <div>
+                <input 
+                    className="input-field" 
+                    type="text" 
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+            </div>
+
+            <div>
+                <input 
+                    className="input-field" 
+                    type="password" 
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+            </div>
+
+            <p>Don't have an account? Sign up!</p>
+
+            <button onClick={handleLogin}>Login</button>
         </main>
-        </>
     )
 }
 
