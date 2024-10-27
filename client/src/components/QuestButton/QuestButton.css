@@ -1,8 +1,12 @@
 .quest-button {
-    border: 2px solid white;
-    width: 600px;
+    border: 2px solid gray;
+    display: block;
     margin-bottom: 1rem;
     align-items: center;
+    transition: border-color 0.25s;
+}
+.quest-button:hover {
+    border-color: white;
 }
 
 .quest-button img {

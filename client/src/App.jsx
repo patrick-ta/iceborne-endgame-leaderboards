@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
-import QuestPage from './pages/QuestPage'
+import QuestPage from './pages/QuestPage/QuestPage.jsx'
 import LoginPage from './pages/LoginPage'
 import SignUpPage from './pages/SignUpPage'
 import SubmitPage from './pages/SubmitPage'
