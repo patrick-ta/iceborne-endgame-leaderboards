@@ -32,6 +32,35 @@ const LeaderboardPage = () => {
         <main className='left-margin'>
             <h1>{convertToTitleCase(questNameParam)}</h1>
         
+            <div className="filter-flex">
+                <select 
+                    className="filter-dropdown"
+                    name="weapon" 
+                >
+                    <option value="default">All Weapons</option>
+                    <option value="Greatsword">Greatsword</option>
+                    <option value="Longsword">Longsword</option>
+                    <option value="Sword and Shield">Sword and Shield</option>
+                    <option value="Dual Blades">Dual Blades</option>
+                    <option value="Hammer">Hammer</option>
+                    <option value="Hunting Horn">Hunting Horn</option>
+                    <option value="Lance">Lance</option>
+                    <option value="Gunlance">Gunlance</option>
+                    <option value="Switch Axe">Switch Axe</option>
+                    <option value="Charge Blade">Charge Blade</option>
+                    <option value="Insect Glaive">Insect Glaive</option>
+                    <option value="Light Bowgun">Light Bowgun</option>
+                    <option value="Heavy Bowgun">Heavy Bowgun</option>
+                    <option value="Bow">Bow</option>
+                </select>
+                <div className="radio-flex">
+                    <input type="radio" id="freestyle" name="ruleset"/>
+                    <label for="freestyle">Freestyle</label><br></br>
+                    <input type="radio" id="ta wiki" name="ruleset"/>
+                    <label for="ta wiki">TA Wiki</label><br></br>
+                </div>
+            </div>
+
             <table>
                 <thead>
                     <tr>

@@ -14,3 +14,21 @@ td, th {
     border: 1px solid #dee2e6;
     padding: 10px;
 }
+
+.radio-flex {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+.filter-flex {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.filter-dropdown {
+    margin-right: 20px;
+}
+
+.radio-flex label {
+    margin-right: 10px;
+}
