@@ -42,7 +42,6 @@ const useFetchSpeedruns = (questNameParam) => {
                     const timeB = convertTimeToMilliseconds(b.time);
                     return timeA - timeB;
                 });
-                console.log(sortedData);
                 setSpeedruns(sortedData);
             } catch (error) {
                 // Log error
