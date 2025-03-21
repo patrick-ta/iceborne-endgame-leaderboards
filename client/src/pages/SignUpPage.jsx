@@ -48,7 +48,15 @@ const SignUpPage = () => {
                 />
             </div>
             
-            <p>Already have an account? Sign in!</p>
+            <p>
+                Already have an account? 
+                <span onClick={() => navigate("/login")}>
+                Log in!
+                </span>
+
+            </p>
+
+            
             <button onClick={handleSignUp}>Sign Up</button>
         
         </main>

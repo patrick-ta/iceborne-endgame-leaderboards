@@ -23,7 +23,7 @@ const UserRoute = ({children}) => {
     return children;
   }
   else {
-    return <Navigate to="/"/>;
+    return <Navigate to="/access-denied"/>;
   }
 };
   

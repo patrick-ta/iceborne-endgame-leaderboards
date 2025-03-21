@@ -8,6 +8,7 @@ import SubmissionPage from './pages/SubmissionPage'
 import UserRoute from './routes/UserRoute'
 import ModeratorRoute from './routes/ModeratorRoute'
 import LeaderboardPage from './pages/LeaderboardPage/LeaderboardPage.jsx'
+import AccessDeniedPage from './pages/AccessDeniedPage.jsx'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Route path='login' element={<LoginPage/>}/>
       <Route path='signup' element={<SignUpPage/>}/>
       <Route path="/quests/:questNameParam" element={<LeaderboardPage/>}></Route>
+      <Route path='access-denied' element={<AccessDeniedPage/>}/>
 
       <Route path='submit' element={
         <UserRoute>
